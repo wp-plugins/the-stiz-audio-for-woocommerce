@@ -37,6 +37,10 @@ class WCJDWooCommerceAdminAdditions {
         add_post_meta($postID, self::PREVIEW_URL_KEY, $previewUrl, true) or update_post_meta($postID, self::PREVIEW_URL_KEY, $previewUrl);
     }
 
+    public function uploadPreviewFile() {
+        do_action('media_upload_file');
+    }
+
     public function previewFileUploadDirectory($pathdata) {
 
         if (!WCJDStates::ownMediaLibraryRequest() && !WCJDStates::ownMediaLibraryUpload()) {
