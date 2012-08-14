@@ -4,7 +4,7 @@ Donate link: N/A
 Tags: audio, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,9 @@ This plugin is available using the standard Wordpress plugin process. On the 'ad
 2. Edit MediaElement CSS & other options on the plugin admin page.
 
 == Changelog ==
+
+= 1.0.3 =
+* Fixed issue files to be uploaded to an invalid directory.
 
 = 1.0.2 =
 * Fixed issue causing incorrect option save behaviour.
