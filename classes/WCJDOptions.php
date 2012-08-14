@@ -18,7 +18,7 @@ class WCJDOptions {
     const DISPLAY_ABOVE_HEADING = 'wcjd-player-above-heading';
     const DISPLAY_BELOW_HEADING = 'wcjd-player-below-heading';
 
-    const UPLOAD_DIRECTORY_PATH_SEGMENT = 'woocommerce-jive-dig-audio-preview-uploads';
+    const UPLOAD_DIRECTORY_PATH_SEGMENT = 'the-stiz-audio-preview-for-woocommerce';
 
     private $options = false;
 

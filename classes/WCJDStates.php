@@ -17,6 +17,23 @@ class WCJDStates {
         return in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')));
     }
 
+    public static function ownMediaLibraryUpload() {
+        global $pagenow;
+
+        if ($pagenow !== 'async-upload.php') {
+            return false;
+        }
+
+        if (!isset($_POST['type'])) {
+            return false;
+        }
+        if ($_POST['type'] !== WCJDOptions::UPLOAD_DIRECTORY_PATH_SEGMENT) {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Determine whether the current request is a media library request initiated from this plugin.
      * @return {boolean} True if the current request is a media library request initiated from this plugin.
