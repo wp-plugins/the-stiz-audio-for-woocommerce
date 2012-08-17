@@ -49,9 +49,9 @@ class WCJDWooCommerceAdminAdditions {
 
         // Uploading a downloadable file
         $subdir = '/'.WCJDOptions::UPLOAD_DIRECTORY_PATH_SEGMENT;
-        $pathdata['path'] = str_replace($pathdata['subdir'], $subdir, $pathdata['path']);
-        $pathdata['url'] = str_replace($pathdata['subdir'], $subdir, $pathdata['url']);
-        $pathdata['subdir'] = str_replace($pathdata['subdir'], $subdir, $pathdata['subdir']);
+        $pathdata['subdir'] = $subdir;
+        $pathdata['path'] .= $subdir;
+        $pathdata['url'] .= $subdir;
 
         return $pathdata;
     }

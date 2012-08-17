@@ -9,9 +9,10 @@ include_once WCJD_ROOT.'/include.php';
 
 $server = new WCJDServeAudio($_GET);
 
+// Determine whether this is a valid request
 if ($server->validRequest()) {
     $server->output();
-    exit();
+    die();
 } else {
     header('HTTP/1.1 403 Forbidden');
     include WCJD_ROOT.'/views/error/403.php';
