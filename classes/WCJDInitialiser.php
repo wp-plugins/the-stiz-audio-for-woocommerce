@@ -14,7 +14,6 @@ class WCJDInitialiser {
      * Add actions depending on current state.
      */
     public function __construct() {
-
         $this->options = new WCJDOptions();
 
         if (WCJDStates::admin()) {
