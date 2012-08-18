@@ -4,11 +4,11 @@ Donate link: N/A
 Tags: audio, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Include attractive & usable audio previews in on your WooCommerce shop pages.
+. Include attractive & usable audio previews in on your WooCommerce shop pages.
 
 == Description ==
 
@@ -33,6 +33,9 @@ This plugin is available using the standard Wordpress plugin process. On the 'ad
 2. Edit MediaElement CSS & other options on the plugin admin page.
 
 == Changelog ==
+
+= 1.0.7 =
+* Added footer HTML to admin panel, enabling user modification of a product's footer HTML.
 
 = 1.0.7 =
 * Updated mp3 streaming to work in a wider range of browsers.

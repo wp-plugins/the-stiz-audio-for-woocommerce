@@ -68,9 +68,9 @@ class WCJDInitialiser {
             add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayAudioPreview'), 10);
         }
 
-        add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayAuthor'), 10);
-        add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayCategories'), 11);
-        add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'informationButton'), 9);
+        add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayFooter'), 10);
+        // add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayCategories'), 11);
+        // add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'informationButton'), 9);
 
         add_action('woocommerce_after_shop_loop', array(&$this->product, 'addProductsWrapClose'));
     }

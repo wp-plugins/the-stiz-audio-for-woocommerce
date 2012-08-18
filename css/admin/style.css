@@ -24,3 +24,7 @@
     height: 400px;
     padding: 10px;
 }
+
+.wcjd-settings-form textarea#wcjd-footer-html {
+    height: 200px;
+}
