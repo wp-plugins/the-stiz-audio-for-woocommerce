@@ -4,6 +4,7 @@ class WCJDOptions {
 
     const OPTIONS = 'wcjd-options';
     const HIDE_THUMBNAILS = 'wcjd-options-hide-thumbnails';
+    const FOOTER_HTML = 'wcjd-options-footer-html';
     const USE_CUSTOM_CSS = 'wcjd-options-use-custom-css';
     const CUSTOM_CSS = 'wcjd-options-custom-css';
     const USE_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-use-custom-media-element-css';
@@ -34,15 +35,16 @@ class WCJDOptions {
     private function load() {
         $this->options = get_option(self::OPTIONS);
         if(!is_array($this->options)) {
-            $this->optionsoptions = array(
+            $this->options = array(
                 self::HIDE_THUMBNAILS => '1',
+                self::FOOTER_HTML => $this->defaultFooterHtml(),
                 self::USE_CUSTOM_CSS => '1',
                 self::CUSTOM_CSS => $this->defaultCss(),
                 self::USE_CUSTOM_MEDIA_ELEMENT_CSS => '1',
                 self::CUSTOM_MEDIA_ELEMENT_CSS => $this->defaultMediaElementCss(),
                 self::PLAYER_HEIGHT => '30',
                 self::PLAYER_WIDTH => '400',
-                self::PLAYER_POSITION => self::DISPLAY_ABOVE_HEADING
+                self::PLAYER_POSITION => self::DISPLAY_ABOVE_HEADING,
             );
             update_option(self::OPTIONS, $this->options);
         }
@@ -64,6 +66,14 @@ class WCJDOptions {
 
     public function hideThumbnails() {
         return $this->getOption(self::HIDE_THUMBNAILS);
+    }
+
+    public function footerHtml() {
+        return stripslashes($this->getOption(self::FOOTER_HTML));
+    }
+
+    public function defaultFooterHtml() {
+        return file_get_contents(WCJD_ROOT.'/views/product/default-footer.html');
     }
 
     public function useCustomMediaElementCss() {

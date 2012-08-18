@@ -3,7 +3,7 @@
 Plugin Name: The Stiz - Audio for WooCommerce
 Plugin URI: http://pagesofinterest.net/projects/the-stiz-audio-for-woocommerce/
 Description:
-Version: 1.0.7
+Version: 1.0.8
 Author: Michael Robinson
 Author URI: http://pagesofinterest.net/
 Contributors: Mike Hemberger

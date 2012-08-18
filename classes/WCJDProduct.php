@@ -60,15 +60,6 @@ class WCJDProduct {
         include WCJD_ROOT.'/views/product/audio-preview.php';
     }
 
-    /**
-     * Output HTML for product information button.
-     */
-    public function informationButton() {
-        global $product;
-        $productUrl = get_permalink($product->id);
-        include WCJD_ROOT.'/views/product/information.php';
-    }
-
     public function displayRating() {
         global $product;
         $rating = $product->get_rating_html('sidebar');
@@ -84,31 +75,34 @@ class WCJDProduct {
     }
 
     /**
-     * Output HTML for the product author's name. Use display_name, nickname & user_login in that order.
+     * Output HTML for product footer, replacing tokens if present.
      */
-    public function displayAuthor() {
+    public function displayFooter() {
         global $product;
 
-        $authorID = $product->get_post_data()->post_author;
-        $authorDisplayName = get_the_author_meta('display_name', $authorID);
-        $authorUsername = get_the_author_meta('user_login', $authorID);
-        $authorNickname = get_the_author_meta('nickname', $authorID);
+        $view = $this->options->footerHtml();
 
-        $authorName = $authorDisplayName ? $authorDisplayName : $authorNickname ? $authorNickname : $authorUsername;
-        include WCJD_ROOT.'/views/product/author.php';
-    }
+        // Author
+        if (strpos($view, '{{producer}}') !== false) {
 
-    /**
-     * Output HTML for product categories.
-     */
-    public function displayCategories() {
-        global $product;
+            $authorID = $product->get_post_data()->post_author;
+            $authorDisplayName = get_the_author_meta('display_name', $authorID);
+            $authorUsername = get_the_author_meta('user_login', $authorID);
+            $authorNickname = get_the_author_meta('nickname', $authorID);
 
-        $categories = $product->get_categories();
-        if (!$categories) {
-            return;
+            $authorName = $authorDisplayName ? $authorDisplayName : $authorNickname ? $authorNickname : $authorUsername;
+            $view = str_replace('{{producer}}', $authorName, $view);
         }
-        include WCJD_ROOT.'/views/product/categories.php';
-    }
+        // Categories
+        if (strpos($view, '{{categories}}') !== false) {
+            $categories = $product->get_categories();
+            $view = str_replace('{{categories}}', $categories, $view);
+        }
+        // Information button
+        if (strpos($view, '{{product-url}}')) {
+            $view = str_replace('{{product-url}}', get_permalink($product->id), $view);
+        }
 
+        echo $view;
+    }
 }

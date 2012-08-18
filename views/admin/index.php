@@ -20,6 +20,21 @@
                         <input autocomplete="off" id="wcjd-hide-preview-thumbnails" type="checkbox" value="1" name="<?php echo WCJDOptions::HIDE_THUMBNAILS; ?>" <?php if ($this->options->hideThumbnails()) echo 'checked="checked"'; ?> />
                         Hide preview thumbnails
                     </label>
+                    <br/>
+                    <div>
+                        <label for="wcjd-footer-html">Footer HTML</label>
+                        <textarea id="wcjd-footer-html" name="<?php echo WCJDOptions::FOOTER_HTML; ?>"><?php echo $this->options->footerHtml(); ?></textarea>
+                        <p class="submit">
+                            <input id="wcjd-reset-footer-html" type="button" class="button-primary" value="<?php _e('Reset Footer HTML') ?>" />
+                        </p>
+                    </div>
+                    <script type="text/javascript">
+                        (function($) {
+                            $('#wcjd-reset-footer-html').click(function() {
+                                $('#wcjd-footer-html').html(<?php echo json_encode($this->options->defaultFooterHtml()); ?>);
+                            });
+                        })(jQuery);
+                    </script>
                 </div>
                 <!-- Styling -->
                 <div id="wcjd-options-general-styling">
