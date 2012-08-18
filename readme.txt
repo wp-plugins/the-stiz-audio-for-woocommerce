@@ -4,7 +4,7 @@ Donate link: N/A
 Tags: audio, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,8 +34,11 @@ This plugin is available using the standard Wordpress plugin process. On the 'ad
 
 == Changelog ==
 
+= 1.0.7 =
+* Updated mp3 streaming to work in a wider range of browsers.
+
 = 1.0.6 =
-Fixed issue with file uploads.
+* Fixed issue with file uploads.
 
 = 1.0.4 - 1.0.5 =
 * Updated media library integration.

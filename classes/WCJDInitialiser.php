@@ -18,6 +18,9 @@ class WCJDInitialiser {
 
         if (WCJDStates::admin()) {
 
+            // Ensure uploads directory is protected
+            WCJDInstaller::protectDownloadDirectory();
+
             // Provide message to admin if WooCommerce is not active.
             if (!WCJDStates::wooCommercePresent()) {
                 add_action('admin_notices', array('WCJDMessages', 'showWooCommerceNotLoadedMessage'));

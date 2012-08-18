@@ -1,7 +1,7 @@
 <?php
 class WCJDInstaller {
 
-    public static function install() {
+    public static function protectDownloadDirectory() {
 
         // Install folder for uploading files and prevent hotlinking
         $downloadDirectory = WCJDOptions::downloadDirectory();

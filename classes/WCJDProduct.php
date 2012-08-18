@@ -33,6 +33,10 @@ class WCJDProduct {
         if ($useCustomCss) {
             add_action('wp_head', array(&$this, 'outputCustomCss'));
         }
+
+        // Add common me overrides
+        wp_register_style('media-element-style-common', plugins_url('css/common.css', dirname(__FILE__)), false, '1.0.0');
+        wp_enqueue_style('media-element-style-common');
     }
 
     public function outputCustomMediaElementCss() {

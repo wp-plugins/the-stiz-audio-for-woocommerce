@@ -1,1 +1,6 @@
-watch -d rsync -avhi -e ssh /Users/facelap/Sites/Work/Code_of_Interest/Web/wordpress/the-stiz-audio-for-woocommerce/* faceleg@home.faceleg.com:/media/INTERNAL/sites/site.faceleg.com/public/wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/
+echo "Warning! This script will delete any files that exist on the destination but not on the source"
+echo "Continue? (y/n)"
+read PROCEED
+if [[ "$PROCEED" == "y" ]]; then
+    watch -d rsync -avhi -e ssh /Users/facelap/Sites/Work/Code_of_Interest/Web/wordpress/the-stiz-audio-for-woocommerce/* faceleg@home.faceleg.com:/media/INTERNAL/sites/site.faceleg.com/public/wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/
+fi

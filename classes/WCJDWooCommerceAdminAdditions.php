@@ -50,9 +50,9 @@ class WCJDWooCommerceAdminAdditions {
         // Uploading a downloadable file
         $subdir = '/'.WCJDOptions::UPLOAD_DIRECTORY_PATH_SEGMENT;
         $pathdata['subdir'] = $subdir;
-        $pathdata['path'] .= $subdir;
-        $pathdata['url'] .= $subdir;
-
+        // Strip out the month / day portion
+        $pathdata['path'] = preg_replace('/\/\d{4}\/\d{2}/', '', $pathdata['path']) . $subdir;
+        $pathdata['url'] = preg_replace('/\/\d{4}\/\d{2}/', '', $pathdata['url']) . $subdir;
         return $pathdata;
     }
 
