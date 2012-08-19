@@ -4,7 +4,7 @@ Donate link: N/A
 Tags: audio, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,10 @@ This plugin is available using the standard Wordpress plugin process. On the 'ad
 
 == Changelog ==
 
-= 1.0.7 =
+= 1.0.9 =
+* Added option to include the player on individual product pages. Re-arranged options to be more usable.
+
+= 1.0.8 =
 * Added footer HTML to admin panel, enabling user modification of a product's footer HTML.
 
 = 1.0.7 =

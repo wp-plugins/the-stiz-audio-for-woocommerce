@@ -55,23 +55,36 @@ class WCJDInitialiser {
 
         add_action('wp_print_scripts', array(&$this->product, 'addAudioPreviewResources'));
 
+        /* Individual product */
+        if ($this->options->displayForIndividualProducts()) {
+            switch ($this->options->individualPlayerPosition()) {
+                case WCJDOptions::DISPLAY_INDIVIDUAL_ABOVE:
+                    add_action('woocommerce_before_single_product_summary', array(&$this->product, 'displayIndividualPlayer'), 10);
+                    break;
+                case WCJDOptions::DISPLAY_INDIVIDUAL_IN_SUMMARY:
+                    add_action('woocommerce_single_product_summary', array(&$this->product, 'displayIndividualPlayer'), 10);
+                    break;
+                default:
+                    add_action('woocommerce_after_single_product_summary', array(&$this->product, 'displayIndividualPlayer'), 10);
+                    break;
+            }
+        }
+
+        /* Previews */
         add_action('woocommerce_before_shop_loop', array(&$this->product, 'addProductsWrapOpen'));
 
         // Remove undesired thumbnail
         if ($this->options->hideThumbnails()) {
             remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail');
         }
-        // add_action('woocommerce_before_shop_loop_item', array(&$this->product, 'displayRating'), 10);
-        if ($this->options->playerPosition() === WCJDOptions::DISPLAY_ABOVE_HEADING) {
-           add_action('woocommerce_before_shop_loop_item', array(&$this->product, 'displayAudioPreview'), 10);
+
+        if ($this->options->previewPlayerPosition() === WCJDOptions::DISPLAY_PREVIEW_ABOVE_HEADING) {
+           add_action('woocommerce_before_shop_loop_item', array(&$this->product, 'displayPreviewPlayer'), 10);
         } else {
-            add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayAudioPreview'), 10);
+            add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayPreviewPlayer'), 10);
         }
 
         add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayFooter'), 10);
-        // add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'displayCategories'), 11);
-        // add_action('woocommerce_after_shop_loop_item', array(&$this->product, 'informationButton'), 9);
-
         add_action('woocommerce_after_shop_loop', array(&$this->product, 'addProductsWrapClose'));
     }
 }

@@ -9,15 +9,29 @@ class WCJDOptions {
     const CUSTOM_CSS = 'wcjd-options-custom-css';
     const USE_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-use-custom-media-element-css';
     const CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-custom-media-element-css';
+    const INDIVIDUAL_PLAYER_CLASS = 'wcjd-audio-individual';
+    const PREVIEW_PLAYER_CLASS = 'wcjd-audio-preview';
 
     // Player initialistion options
-    const PLAYER_WIDTH = 'audioWidth';
-    const PLAYER_HEIGHT = 'audioHeight';
-    const PLAYER_POSITION = 'wcjd-options-player-position';
 
-    // Values
-    const DISPLAY_ABOVE_HEADING = 'wcjd-player-above-heading';
-    const DISPLAY_BELOW_HEADING = 'wcjd-player-below-heading';
+    // Single product values
+    const DISPLAY_FOR_INDIVIDUAL_PRODUCTS = 'the-stiz-individual-display';
+    const DISPLAY_INDIVIDUAL_ABOVE = 'the-stiz-individual-display-above';
+    const DISPLAY_INDIVIDUAL_BELOW = 'the-stiz-individual-display-below';
+    const DISPLAY_INDIVIDUAL_IN_SUMMARY = 'the-stiz-individual-display-in-summary';
+
+    const INDIVIDUAL_PLAYER_WIDTH = 'the-stiz-individual-width';
+    const INDIVIDUAL_PLAYER_HEIGHT = 'thi-stiz-individual-height';
+    const INDIVIDUAL_PLAYER_POSITION = 'thi-stiz-individual-player-position';
+
+    // Preview product
+    const DISPLAY_FOR_PREVIEWS = 'the-stiz-preview-display';
+    const DISPLAY_PREVIEW_ABOVE_HEADING = 'wcjd-player-above-heading';
+    const DISPLAY_PREVIEW_BELOW_HEADING = 'wcjd-player-below-heading';
+
+    const PREVIEW_PLAYER_WIDTH = 'the-stiz-preview-width';
+    const PREVIEW_PLAYER_HEIGHT = 'the-stiz-preview-height';
+    const PREVIEW_PLAYER_POSITION = 'wcjd-options-player-position';
 
     const UPLOAD_DIRECTORY_PATH_SEGMENT = 'the-stiz-audio-preview-for-woocommerce';
 
@@ -42,9 +56,20 @@ class WCJDOptions {
                 self::CUSTOM_CSS => $this->defaultCss(),
                 self::USE_CUSTOM_MEDIA_ELEMENT_CSS => '1',
                 self::CUSTOM_MEDIA_ELEMENT_CSS => $this->defaultMediaElementCss(),
-                self::PLAYER_HEIGHT => '30',
-                self::PLAYER_WIDTH => '400',
-                self::PLAYER_POSITION => self::DISPLAY_ABOVE_HEADING,
+                self::INDIVIDUAL_PLAYER_CLASS => $this->individualPlayerClass(),
+                self::PREVIEW_PLAYER_CLASS => $this->previewPlayerClass(),
+
+                self::DISPLAY_FOR_PREVIEWS => true,
+
+                self::PREVIEW_PLAYER_HEIGHT => 30,
+                self::PREVIEW_PLAYER_WIDTH => 400,
+                self::PREVIEW_PLAYER_POSITION => self::DISPLAY_PREVIEW_ABOVE_HEADING,
+
+                self::DISPLAY_FOR_INDIVIDUAL_PRODUCTS => true,
+
+                self::INDIVIDUAL_PLAYER_HEIGHT => 30,
+                self::INDIVIDUAL_PLAYER_WIDTH => 400,
+                self::INDIVIDUAL_PLAYER_POSITION => self::DISPLAY_INDIVIDUAL_IN_SUMMARY,
             );
             update_option(self::OPTIONS, $this->options);
         }
@@ -104,15 +129,45 @@ class WCJDOptions {
         return file_get_contents(WCJD_ROOT.'/css/custom.css');
     }
 
-    public function playerHeight() {
-        return $this->getOption(self::PLAYER_HEIGHT);
+    public function previewPlayerHeight() {
+        return $this->getOption(self::PREVIEW_PLAYER_HEIGHT);
     }
 
-    public function playerWidth() {
-        return $this->getOption(self::PLAYER_WIDTH);
+    public function previewPlayerWidth() {
+        return $this->getOption(self::PREVIEW_PLAYER_WIDTH);
     }
 
-    public function playerPosition() {
-        return $this->getOption(self::PLAYER_POSITION);
+    public function previewPlayerPosition() {
+        return $this->getOption(self::PREVIEW_PLAYER_POSITION);
     }
+
+    public function displayForPreviews() {
+        return $this->getOption(self::DISPLAY_FOR_PREVIEWS);
+    }
+
+    public function displayForIndividualProducts() {
+        return $this->getOption(self::DISPLAY_FOR_INDIVIDUAL_PRODUCTS);
+    }
+
+    public function individualPlayerHeight() {
+        return $this->getOption(self::INDIVIDUAL_PLAYER_HEIGHT);
+    }
+
+    public function individualPlayerWidth() {
+        return $this->getOption(self::INDIVIDUAL_PLAYER_WIDTH);
+    }
+
+    public function individualPlayerPosition() {
+        return $this->getOption(self::INDIVIDUAL_PLAYER_POSITION);
+    }
+
+    public function individualPlayerClass() {
+        return self::INDIVIDUAL_PLAYER_CLASS;
+    }
+
+    public function previewPlayerClass() {
+        return self::PREVIEW_PLAYER_CLASS;
+    }
+
+
 }
