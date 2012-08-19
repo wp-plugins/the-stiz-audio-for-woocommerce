@@ -9,20 +9,56 @@
 
             <div id="wcjd-options-tabs">
                 <ul>
-                    <li><a href="#wcjd-options-general">General</a></li>
+                    <li><a href="#wcjd-options-product-preview">Product Preview</a></li>
+                    <li><a href="#wcjd-options-individual-product">Individual Product</a></li>
                     <li><a href="#wcjd-options-general-styling">Product list Styling</a></li>
-                    <li><a href="#wcjd-options-audio-preview-settings">Audio Preview Settings</a></li>
-                    <li><a href="#wcjd-options-audio-preview-styling">Audio Preview Styling</a></li>
+                    <li><a href="#wcjd-options-audio-preview-styling">Audio Styling</a></li>
                 </ul>
-                <!-- General -->
-                <div id="wcjd-options-general">
+
+                <!-- Product Preview -->
+                <div id="wcjd-options-product-preview">
                     <label for="wcjd-hide-preview-thumbnails">
                         <input autocomplete="off" id="wcjd-hide-preview-thumbnails" type="checkbox" value="1" name="<?php echo WCJDOptions::HIDE_THUMBNAILS; ?>" <?php if ($this->options->hideThumbnails()) echo 'checked="checked"'; ?> />
                         Hide preview thumbnails
                     </label>
                     <br/>
+
+                    <hr/>
+
+                    <h3>Product Previews</h3>
+                    <label for="wcjd-display-preview-player">
+                        <input autocomplete="off" id="wcjd-display-preview-player" type="checkbox" value="<?php echo WCJDOptions::DISPLAY_FOR_PREVIEWS; ?>" name="<?php echo WCJDOptions::DISPLAY_FOR_PREVIEWS; ?>" <?php if ($this->options->displayForPreviews() === WCJDOptions::DISPLAY_FOR_PREVIEWS) echo 'checked="checked"'; ?>/>
+                        Display player on preview items
+                    </label>
+                    <div class="wcjd-nested-elements" id="wcjd-display-preview-player-position-wrap">
+                        <label for="wcjd-position-above">
+                            <input autocomplete="off" id="wcjd-position-above" type="radio" value="<?php echo WCJDOptions::DISPLAY_PREVIEW_ABOVE_HEADING; ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_POSITION; ?>" <?php if ($this->options->previewPlayerPosition() === WCJDOptions::DISPLAY_PREVIEW_ABOVE_HEADING) echo 'checked="checked"'; ?>/>
+                            Above product heading
+                        </label>
+                        <br/>
+                        <label for="wcjd-position-below">
+                            <input autocomplete="off" id="wcjd-position-below" type="radio" value="<?php echo WCJDOptions::DISPLAY_PREVIEW_BELOW_HEADING; ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_POSITION; ?>" <?php if ($this->options->previewPlayerPosition() === WCJDOptions::DISPLAY_PREVIEW_BELOW_HEADING) echo 'checked="checked"'; ?>/>
+                            Below product heading
+                        </label>
+                        <br/>
+                        <br/>
+                        <label for="wcjd-width">Width</label>
+                        <input autocomplete="off" id="wcjd-width" type="text" value="<?php echo $this->options->previewPlayerWidth(); ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_WIDTH; ?>" />
+                        <label for="wcjd-height">Height</label>
+                        <input autocomplete="off" id="wcjd-height" type="text" value="<?php echo $this->options->previewPlayerHeight(); ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_HEIGHT; ?>" />
+                    </div>
+                    <script type="text/javascript">
+                        (function($) {
+                            $('#wcjd-display-preview-player').change(function() {
+                                $('#wcjd-display-preview-player-position-wrap').toggle($(this).is(':checked'));
+                            }).trigger('change');
+                        })(jQuery);
+                    </script>
+
+                    <hr/>
+
                     <div>
-                        <label for="wcjd-footer-html">Footer HTML</label>
+                        <label for="wcjd-footer-html">Product Preview Footer HTML</label>
                         <textarea id="wcjd-footer-html" name="<?php echo WCJDOptions::FOOTER_HTML; ?>"><?php echo $this->options->footerHtml(); ?></textarea>
                         <p class="submit">
                             <input id="wcjd-reset-footer-html" type="button" class="button-primary" value="<?php _e('Reset Footer HTML') ?>" />
@@ -36,13 +72,66 @@
                         })(jQuery);
                     </script>
                 </div>
+
+                <!-- Individual Products -->
+                <div id="wcjd-options-individual-product">
+
+                    <label for="wcjd-display-individual-player">
+                        <input autocomplete="off" id="wcjd-display-individual-player" type="checkbox" value="<?php echo WCJDOptions::DISPLAY_FOR_INDIVIDUAL_PRODUCTS; ?>" name="<?php echo WCJDOptions::DISPLAY_FOR_INDIVIDUAL_PRODUCTS; ?>" <?php if ($this->options->displayForIndividualProducts() === WCJDOptions::DISPLAY_FOR_INDIVIDUAL_PRODUCTS) echo 'checked="checked"'; ?>/>
+                        Display player on product pages
+                    </label>
+                    <div class="wcjd-nested-elements" id="wcjd-display-individual-player-position-wrap">
+                        <label for="wcjd-individual-position-above">
+                            <input autocomplete="off" id="wcjd-individual-position-above" type="radio" value="<?php echo WCJDOptions::DISPLAY_INDIVIDUAL_ABOVE; ?>"  name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_POSITION; ?>" <?php if ($this->options->individualPlayerPosition() === WCJDOptions::DISPLAY_INDIVIDUAL_ABOVE) echo 'checked="checked"'; ?>/>
+                            Above product
+                        </label>
+                        <br/>
+                        <label for="wcjd-individual-position-in">
+                            <input autocomplete="off" id="wcjd-individual-position-in" type="radio" value="<?php echo WCJDOptions::DISPLAY_INDIVIDUAL_IN_SUMMARY; ?>" name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_POSITION; ?>" <?php if ($this->options->individualPlayerPosition() === WCJDOptions::DISPLAY_INDIVIDUAL_IN_SUMMARY) echo 'checked="checked"'; ?>/>
+                            Inside product summary
+                        </label>
+                        <br/>
+                        <label for="wcjd-individual-position-below">
+                            <input autocomplete="off" id="wcjd-individual-position-below" type="radio" value="<?php echo WCJDOptions::DISPLAY_INDIVIDUAL_BELOW; ?>" name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_POSITION; ?>" <?php if ($this->options->individualPlayerPosition() === WCJDOptions::DISPLAY_INDIVIDUAL_BELOW) echo 'checked="checked"'; ?>/>
+                            Below product
+                        </label>
+                        <br/>
+                        <br/>
+                        <label for="wcjd-individual-width">Width</label>
+                        <input autocomplete="off" id="wcjd-individual-width" type="text" value="<?php echo $this->options->individualPlayerWidth(); ?>" name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_WIDTH; ?>" />
+                        <label for="wcjd-individual-height">Height</label>
+                        <input autocomplete="off" id="wcjd-individual-height" type="text" value="<?php echo $this->options->individualPlayerHeight(); ?>" name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_HEIGHT; ?>" />
+                    </div>
+                    <script type="text/javascript">
+                        (function($) {
+                            $('#wcjd-display-individual-player').change(function() {
+                                $('#wcjd-display-individual-player-position-wrap').toggle($(this).is(':checked'));
+                            }).trigger('change');
+                        })(jQuery);
+                    </script>
+
+                    <?php /*<div>
+                         <label for="wcjd-footer-html">Individual Product Footer HTML</label>
+                        <textarea id="wcjd-footer-html" name="<?php echo WCJDOptions::FOOTER_HTML; ?>"><?php echo $this->options->footerHtml(); ?></textarea>
+                        <p class="submit">
+                            <input id="wcjd-reset-footer-html" type="button" class="button-primary" value="<?php _e('Reset Footer HTML') ?>" />
+                        </p>
+                    </div>
+                    <script type="text/javascript">
+                        (function($) {
+                            $('#wcjd-reset-footer-html').click(function() {
+                                $('#wcjd-footer-html').html(<?php echo json_encode($this->options->defaultFooterHtml()); ?>);
+                            });
+                        })(jQuery);
+                    </script> */ ?>
+                </div>
                 <!-- Styling -->
                 <div id="wcjd-options-general-styling">
                     <label for="wcjd-use-custom-css">
                         <input autocomplete="off" id="wcjd-use-custom-css" type="checkbox" value="1" name="<?php echo WCJDOptions::USE_CUSTOM_CSS; ?>" <?php if ($this->options->useCustomCss()) echo 'checked="checked"'; ?> />
                         Use custom CSS
                     </label>
-                    <div id="wcjd-custom-css-wrap" <?php if (!$this->options->useCustomCss()) 'style="display:none"'; ?> >
+                    <div class="wcjd-nested-elements" id="wcjd-custom-css-wrap" <?php if (!$this->options->useCustomCss()) 'style="display:none"'; ?> >
                         <textarea id="wcjd-custom-css" name="<?php echo WCJDOptions::CUSTOM_CSS; ?>"><?php echo $this->options->customCss(); ?></textarea>
                         <p class="submit">
                             <input id="wcjd-reset-custom-css" type="button" class="button-primary" value="<?php _e('Reset Custom CSS') ?>" />
@@ -59,32 +148,14 @@
                         })(jQuery);
                     </script>
                 </div>
-                <!-- Media Element Settings -->
-                <div id="wcjd-options-audio-preview-settings">
-                    <label for="wcjd-position-above">
-                        <input autocomplete="off" id="wcjd-position-above" type="radio" value="<?php echo WCJDOptions::DISPLAY_ABOVE_HEADING; ?>" name="<?php echo WCJDOptions::PLAYER_POSITION; ?>" <?php if ($this->options->playerPosition() === WCJDOptions::DISPLAY_ABOVE_HEADING) echo 'checked="checked"'; ?>/>
-                        Above product heading
-                    </label>
-                    <br/>
-                    <label for="wcjd-position-below">
-                        <input autocomplete="off" id="wcjd-position-below" type="radio" value="<?php echo WCJDOptions::DISPLAY_BELOW_HEADING; ?>" name="<?php echo WCJDOptions::PLAYER_POSITION; ?>" <?php if ($this->options->playerPosition() === WCJDOptions::DISPLAY_BELOW_HEADING) echo 'checked="checked"'; ?>/>
-                        Below product heading
-                    </label>
-                    <br/>
-                    <br/>
-                    <label for="wcjd-width">Width</label>
-                    <input autocomplete="off" id="wcjd-width" type="text" value="<?php echo $this->options->playerWidth(); ?>" name="<?php echo WCJDOptions::PLAYER_WIDTH; ?>" />
-                    <br/>
-                    <label for="wcjd-height">Height</label>
-                    <input autocomplete="off" id="wcjd-height" type="text" value="<?php echo $this->options->playerHeight(); ?>" name="<?php echo WCJDOptions::PLAYER_HEIGHT; ?>" />
-                </div>
+
                 <!-- Media Element Styling -->
                 <div id="wcjd-options-audio-preview-styling">
                     <label for="wcjd-use-custom-media-element-css">
                         <input autocomplete="off" id="wcjd-use-custom-media-element-css" type="checkbox" value="1" name="<?php echo WCJDOptions::USE_CUSTOM_MEDIA_ELEMENT_CSS; ?>" <?php if ($this->options->useCustomMediaElementCss()) echo 'checked="checked"'; ?> />
                         Use custom Media Element CSS
                     </label>
-                    <div id="wcjd-custom-media-element-css-wrap" <?php if (!$this->options->useCustomMediaElementCss()) 'style="display:none"'; ?> >
+                    <div class="wcjd-nested-elements" id="wcjd-custom-media-element-css-wrap" <?php if (!$this->options->useCustomMediaElementCss()) 'style="display:none"'; ?> >
                         <textarea id="wcjd-custom-media-element-css" name="<?php echo WCJDOptions::CUSTOM_MEDIA_ELEMENT_CSS; ?>"><?php echo $this->options->customMediaElementCss(); ?></textarea>
                         <p class="submit">
                             Use default:

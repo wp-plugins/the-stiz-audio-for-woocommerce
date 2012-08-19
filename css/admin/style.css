@@ -28,3 +28,7 @@
 .wcjd-settings-form textarea#wcjd-footer-html {
     height: 200px;
 }
+
+.wcjd-nested-elements {
+    margin: 25px;
+}

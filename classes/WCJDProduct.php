@@ -14,8 +14,10 @@ class WCJDProduct {
         wp_enqueue_script('media-element-initialisation', plugins_url('javascript/media-element/initialisation.js', dirname(__FILE__)), 'media-element', '2.9.1', true);
         wp_localize_script('media-element-initialisation', 'wcjdAudioPreviewOptions',
             array(
-                WCJDOptions::PLAYER_WIDTH => $this->options->playerWidth(),
-                WCJDOptions::PLAYER_HEIGHT => $this->options->playerHeight(),
+                WCJDOptions::PREVIEW_PLAYER_WIDTH => $this->options->previewPlayerWidth(),
+                WCJDOptions::PREVIEW_PLAYER_HEIGHT => $this->options->previewPlayerHeight(),
+                WCJDOptions::INDIVIDUAL_PLAYER_WIDTH => $this->options->individualPlayerWidth(),
+                WCJDOptions::INDIVIDUAL_PLAYER_HEIGHT => $this->options->individualPlayerHeight(),
                 'pluginPath' => plugins_url('mediaelement-default/', dirname(__FILE__))
             ));
 
@@ -54,16 +56,22 @@ class WCJDProduct {
         include WCJD_ROOT.'/views/head/css/custom.php';
     }
 
-    public function displayAudioPreview() {
+    public function displayPlayer($className) {
         global $product;
         $previewUrl = get_post_meta($product->id, WCJDWooCommerceAdminAdditions::PREVIEW_URL_KEY, true);
         include WCJD_ROOT.'/views/product/audio-preview.php';
     }
 
-    public function displayRating() {
-        global $product;
-        $rating = $product->get_rating_html('sidebar');
-        include WCJD_ROOT.'/views/product/rating.php';
+    /* Individual player */
+
+    public function displayIndividualPlayer() {
+        return $this->displayPlayer($this->options->individualPlayerClass());
+    }
+
+    /* Preview player */
+
+    public function displayPreviewPlayer() {
+        return $this->displayPlayer($this->options->previewPlayerClass());
     }
 
     public function addProductsWrapOpen() {
