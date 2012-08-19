@@ -31,6 +31,7 @@
                         Display player on preview items
                     </label>
                     <div class="wcjd-nested-elements" id="wcjd-display-preview-player-position-wrap">
+                        <p>Audio element will be given the class "<?php echo $this->options->previewPlayerClass(); ?>".</p>
                         <label for="wcjd-position-above">
                             <input autocomplete="off" id="wcjd-position-above" type="radio" value="<?php echo WCJDOptions::DISPLAY_PREVIEW_ABOVE_HEADING; ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_POSITION; ?>" <?php if ($this->options->previewPlayerPosition() === WCJDOptions::DISPLAY_PREVIEW_ABOVE_HEADING) echo 'checked="checked"'; ?>/>
                             Above product heading
@@ -81,6 +82,7 @@
                         Display player on product pages
                     </label>
                     <div class="wcjd-nested-elements" id="wcjd-display-individual-player-position-wrap">
+                        <p>Audio element will be given the class "<?php echo $this->options->individualPlayerClass(); ?>".</p>
                         <label for="wcjd-individual-position-above">
                             <input autocomplete="off" id="wcjd-individual-position-above" type="radio" value="<?php echo WCJDOptions::DISPLAY_INDIVIDUAL_ABOVE; ?>"  name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_POSITION; ?>" <?php if ($this->options->individualPlayerPosition() === WCJDOptions::DISPLAY_INDIVIDUAL_ABOVE) echo 'checked="checked"'; ?>/>
                             Above product
