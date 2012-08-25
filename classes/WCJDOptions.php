@@ -7,8 +7,13 @@ class WCJDOptions {
     const FOOTER_HTML = 'wcjd-options-footer-html';
     const USE_CUSTOM_CSS = 'wcjd-options-use-custom-css';
     const CUSTOM_CSS = 'wcjd-options-custom-css';
-    const USE_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-use-custom-media-element-css';
-    const CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-custom-media-element-css';
+
+    const PREVIEW_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-use-custom-media-element-css';
+    const PREVIEW_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-custom-media-element-css';
+
+    const INDIVIDUAL_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-individual-use-custom-media-element-css';
+    const INDIVIDUAL_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS = 'wcjd-options-individual-custom-media-element-css';
+
     const INDIVIDUAL_PLAYER_CLASS = 'wcjd-audio-individual';
     const PREVIEW_PLAYER_CLASS = 'wcjd-audio-preview';
 
@@ -54,8 +59,10 @@ class WCJDOptions {
                 self::FOOTER_HTML => $this->defaultFooterHtml(),
                 self::USE_CUSTOM_CSS => '1',
                 self::CUSTOM_CSS => $this->defaultCss(),
-                self::USE_CUSTOM_MEDIA_ELEMENT_CSS => '1',
-                self::CUSTOM_MEDIA_ELEMENT_CSS => $this->defaultMediaElementCss(),
+
+                self::PREVIEW_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS => '1',
+                self::PREVIEW_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS => $this->defaultMediaElementCss(),
+
                 self::INDIVIDUAL_PLAYER_CLASS => $this->individualPlayerClass(),
                 self::PREVIEW_PLAYER_CLASS => $this->previewPlayerClass(),
 
@@ -101,12 +108,20 @@ class WCJDOptions {
         return file_get_contents(WCJD_ROOT.'/views/product/default-footer.html');
     }
 
-    public function useCustomMediaElementCss() {
-        return $this->getOption(self::USE_CUSTOM_MEDIA_ELEMENT_CSS);
+    public function previewPlayerUseCustomMediaElementCss() {
+        return $this->getOption(self::PREVIEW_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS);
     }
 
-    public function customMediaElementCss() {
-        return $this->getOption(self::CUSTOM_MEDIA_ELEMENT_CSS);
+    public function previewPlayerCustomMediaElementCss() {
+        return $this->getOption(self::PREVIEW_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS);
+    }
+
+    public function individualPlayerUseCustomMediaElementCss() {
+        return $this->getOption(self::INDIVIDUAL_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS);
+    }
+
+    public function individualPlayerCustomMediaElementCss() {
+        return $this->getOption(self::INDIVIDUAL_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS);
     }
 
     public function defaultMediaElementCss() {

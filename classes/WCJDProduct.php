@@ -22,27 +22,47 @@ class WCJDProduct {
             ));
 
         // Media Element CSS
-        // If the user has not chosen to use custom media element CSS, or they have but haven't actually modified the CSS, output the default style.
-        $useCustomMediaElementCss = $this->options->useCustomMediaElementCss() && ($this->options->defaultMediaElementCss() !== $this->options->customMediaElementCss());
-        if ($useCustomMediaElementCss) {
-            add_action('wp_head', array(&$this, 'outputCustomMediaElementCss'));
+
+        if (is_single()) {
+            // If the user has not chosen to use custom media element CSS,
+            // or they have but haven't actually modified the CSS, output the default style.
+            $useCustomMediaElementCss = $this->options->individualPlayerUseCustomMediaElementCss() && ($this->options->defaultMediaElementCss() !== $this->options->individualPlayerCustomMediaElementCss());
+            if ($useCustomMediaElementCss) {
+                add_action('wp_head', array(&$this, 'outputIndividualPlayerCustomMediaElementCss'));
+            } else {
+                wp_register_style('media-element-style', plugins_url('mediaelement-default/mediaelementplayer.css', dirname(__FILE__)), false, '2.9.1');
+                wp_enqueue_style('media-element-style');
+            }
         } else {
-            wp_register_style('media-element-style', plugins_url('mediaelement-default/mediaelementplayer.css', dirname(__FILE__)), false, '2.9.1');
-            wp_enqueue_style('media-element-style');
+            // If the user has not chosen to use custom media element CSS,
+            // or they have but haven't actually modified the CSS, output the default style.
+            $useCustomMediaElementCss = $this->options->previewPlayerUseCustomMediaElementCss() && ($this->options->defaultMediaElementCss() !== $this->options->previewPlayerCustomMediaElementCss());
+            if ($useCustomMediaElementCss) {
+                add_action('wp_head', array(&$this, 'outputPreviewPlayerCustomMediaElementCss'));
+            } else {
+                wp_register_style('media-element-style', plugins_url('mediaelement-default/mediaelementplayer.css', dirname(__FILE__)), false, '2.9.1');
+                wp_enqueue_style('media-element-style');
+            }
+            // Custom CSS
+            $useCustomCss = $this->options->useCustomCss();
+            if ($useCustomCss) {
+                add_action('wp_head', array(&$this, 'outputCustomCss'));
+            }
         }
-        // Custom CSS
-        $useCustomCss = $this->options->useCustomCss();
-        if ($useCustomCss) {
-            add_action('wp_head', array(&$this, 'outputCustomCss'));
-        }
+
 
         // Add common me overrides
         wp_register_style('media-element-style-common', plugins_url('css/common.css', dirname(__FILE__)), false, '1.0.0');
         wp_enqueue_style('media-element-style-common');
     }
 
-    public function outputCustomMediaElementCss() {
-        $css = WCJDCSS::minify($this->options->customMediaElementCss());
+    public function outputPreviewPlayerCustomMediaElementCss() {
+        $css = WCJDCSS::minify($this->options->previewPlayerCustomMediaElementCss());
+        include WCJD_ROOT.'/views/head/css/custom-media-element.php';
+    }
+
+    public function outputIndividualPlayerCustomMediaElementCss() {
+        $css = WCJDCSS::minify($this->options->individualPlayerCustomMediaElementCss());
         include WCJD_ROOT.'/views/head/css/custom-media-element.php';
     }
 

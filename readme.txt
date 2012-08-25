@@ -4,15 +4,15 @@ Donate link: N/A
 Tags: audio, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-. Include attractive & usable audio previews in on your WooCommerce shop pages.
+Include attractive & usable audio previews in on your WooCommerce shop pages.
 
 == Description ==
 
-. Using MediaElement, The Stiz - Audio for WooCommerce offers maximum compatibility with HTML5 for the latest browsers, falling back to flash when required.
+Using MediaElement, The Stiz - Audio for WooCommerce offers maximum compatibility with HTML5 for the latest browsers, falling back to flash when required.
 
 **Core Features**
 
@@ -33,6 +33,9 @@ This plugin is available using the standard Wordpress plugin process. On the 'ad
 2. Edit MediaElement CSS & other options on the plugin admin page.
 
 == Changelog ==
+
+= 1.0.11 =
+* Added custom Media Element CSS admin option for individual product page player.
 
 = 1.0.10 =
 * Added note in admin section about classes applied to preview / individual players.

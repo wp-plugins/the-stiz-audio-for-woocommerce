@@ -11,12 +11,13 @@
                 <ul>
                     <li><a href="#wcjd-options-product-preview">Product Preview</a></li>
                     <li><a href="#wcjd-options-individual-product">Individual Product</a></li>
-                    <li><a href="#wcjd-options-general-styling">Product list Styling</a></li>
-                    <li><a href="#wcjd-options-audio-preview-styling">Audio Styling</a></li>
                 </ul>
 
                 <!-- Product Preview -->
                 <div id="wcjd-options-product-preview">
+
+
+                    <h3>Product Previews</h3>
                     <label for="wcjd-hide-preview-thumbnails">
                         <input autocomplete="off" id="wcjd-hide-preview-thumbnails" type="checkbox" value="1" name="<?php echo WCJDOptions::HIDE_THUMBNAILS; ?>" <?php if ($this->options->hideThumbnails()) echo 'checked="checked"'; ?> />
                         Hide preview thumbnails
@@ -25,7 +26,6 @@
 
                     <hr/>
 
-                    <h3>Product Previews</h3>
                     <label for="wcjd-display-preview-player">
                         <input autocomplete="off" id="wcjd-display-preview-player" type="checkbox" value="<?php echo WCJDOptions::DISPLAY_FOR_PREVIEWS; ?>" name="<?php echo WCJDOptions::DISPLAY_FOR_PREVIEWS; ?>" <?php if ($this->options->displayForPreviews() === WCJDOptions::DISPLAY_FOR_PREVIEWS) echo 'checked="checked"'; ?>/>
                         Display player on preview items
@@ -47,6 +47,35 @@
                         <input autocomplete="off" id="wcjd-width" type="text" value="<?php echo $this->options->previewPlayerWidth(); ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_WIDTH; ?>" />
                         <label for="wcjd-height">Height</label>
                         <input autocomplete="off" id="wcjd-height" type="text" value="<?php echo $this->options->previewPlayerHeight(); ?>" name="<?php echo WCJDOptions::PREVIEW_PLAYER_HEIGHT; ?>" />
+
+                        <hr/>
+
+                        <h3>Custom Product Preview Media Element CSS</h3>
+                        <label for="wcjd-use-custom-media-element-css">
+                            <input autocomplete="off" id="wcjd-use-custom-media-element-css" type="checkbox" value="1" name="<?php echo WCJDOptions::PREVIEW_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS; ?>" <?php if ($this->options->previewPlayerUseCustomMediaElementCss()) echo 'checked="checked"'; ?> />
+                            Use custom Media Element CSS
+                        </label>
+                        <div class="wcjd-nested-elements" id="wcjd-custom-media-element-css-wrap" <?php if (!$this->options->previewPlayerUseCustomMediaElementCss()) 'style="display:none"'; ?> >
+                            <textarea id="wcjd-custom-media-element-css" name="<?php echo WCJDOptions::PREVIEW_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS; ?>"><?php echo $this->options->previewPlayerCustomMediaElementCss(); ?></textarea>
+                            <p class="submit">
+                                Use default:
+                                <input id="wcjd-reset-custom-media-element-css" type="button" class="button-primary" value="<?php _e('Standard Media Element CSS') ?>" />
+                                <input id="wcjd-reset-custom-media-element-single-button-css" type="button" class="button-primary" value="<?php _e('Single Button Media Element CSS') ?>" />
+                            </p>
+                        </div>
+                        <script type="text/javascript">
+                            (function($) {
+                                $('#wcjd-use-custom-media-element-css').change(function() {
+                                    $('#wcjd-custom-media-element-css-wrap').toggle($(this).is(':checked'));
+                                });
+                                $('#wcjd-reset-custom-media-element-css').click(function() {
+                                    $('#wcjd-custom-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementCss()); ?>);
+                                });
+                                $('#wcjd-reset-custom-media-element-single-button-css').click(function() {
+                                    $('#wcjd-custom-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementSingleButtonCss()); ?>);
+                                });
+                            })(jQuery);
+                        </script>
                     </div>
                     <script type="text/javascript">
                         (function($) {
@@ -59,6 +88,7 @@
                     <hr/>
 
                     <div>
+                        <h3>Custom Product Preview Footer HTML</h3>
                         <label for="wcjd-footer-html">Product Preview Footer HTML</label>
                         <textarea id="wcjd-footer-html" name="<?php echo WCJDOptions::FOOTER_HTML; ?>"><?php echo $this->options->footerHtml(); ?></textarea>
                         <p class="submit">
@@ -72,10 +102,36 @@
                             });
                         })(jQuery);
                     </script>
+
+                    <hr/>
+
+                    <h3>Custom Product Preview CSS</h3>
+                    <label for="wcjd-use-custom-css">
+                        <input autocomplete="off" id="wcjd-use-custom-css" type="checkbox" value="1" name="<?php echo WCJDOptions::USE_CUSTOM_CSS; ?>" <?php if ($this->options->useCustomCss()) echo 'checked="checked"'; ?> />
+                        Use custom CSS
+                    </label>
+                    <div class="wcjd-nested-elements" id="wcjd-custom-css-wrap" <?php if (!$this->options->useCustomCss()) 'style="display:none"'; ?> >
+                        <textarea id="wcjd-custom-css" name="<?php echo WCJDOptions::CUSTOM_CSS; ?>"><?php echo $this->options->customCss(); ?></textarea>
+                        <p class="submit">
+                            <input id="wcjd-reset-custom-css" type="button" class="button-primary" value="<?php _e('Reset Custom CSS') ?>" />
+                        </p>
+                    </div>
+                    <script type="text/javascript">
+                        (function($) {
+                            $('#wcjd-use-custom-css').change(function() {
+                                $('#wcjd-custom-css-wrap').toggle($(this).is(':checked'));
+                            });
+                            $('#wcjd-reset-custom-css').click(function() {
+                                $('#wcjd-custom-css').html(<?php echo json_encode($this->options->defaultCss()); ?>);
+                            });
+                        })(jQuery);
+                    </script>
                 </div>
 
                 <!-- Individual Products -->
                 <div id="wcjd-options-individual-product">
+
+                    <h3>Individual Product Pages</h3>
 
                     <label for="wcjd-display-individual-player">
                         <input autocomplete="off" id="wcjd-display-individual-player" type="checkbox" value="<?php echo WCJDOptions::DISPLAY_FOR_INDIVIDUAL_PRODUCTS; ?>" name="<?php echo WCJDOptions::DISPLAY_FOR_INDIVIDUAL_PRODUCTS; ?>" <?php if ($this->options->displayForIndividualProducts() === WCJDOptions::DISPLAY_FOR_INDIVIDUAL_PRODUCTS) echo 'checked="checked"'; ?>/>
@@ -126,55 +182,32 @@
                             });
                         })(jQuery);
                     </script> */ ?>
-                </div>
-                <!-- Styling -->
-                <div id="wcjd-options-general-styling">
-                    <label for="wcjd-use-custom-css">
-                        <input autocomplete="off" id="wcjd-use-custom-css" type="checkbox" value="1" name="<?php echo WCJDOptions::USE_CUSTOM_CSS; ?>" <?php if ($this->options->useCustomCss()) echo 'checked="checked"'; ?> />
-                        Use custom CSS
-                    </label>
-                    <div class="wcjd-nested-elements" id="wcjd-custom-css-wrap" <?php if (!$this->options->useCustomCss()) 'style="display:none"'; ?> >
-                        <textarea id="wcjd-custom-css" name="<?php echo WCJDOptions::CUSTOM_CSS; ?>"><?php echo $this->options->customCss(); ?></textarea>
-                        <p class="submit">
-                            <input id="wcjd-reset-custom-css" type="button" class="button-primary" value="<?php _e('Reset Custom CSS') ?>" />
-                        </p>
-                    </div>
-                    <script type="text/javascript">
-                        (function($) {
-                            $('#wcjd-use-custom-css').change(function() {
-                                $('#wcjd-custom-css-wrap').toggle($(this).is(':checked'));
-                            });
-                            $('#wcjd-reset-custom-css').click(function() {
-                                $('#wcjd-custom-css').html(<?php echo json_encode($this->options->defaultCss()); ?>);
-                            });
-                        })(jQuery);
-                    </script>
-                </div>
 
-                <!-- Media Element Styling -->
-                <div id="wcjd-options-audio-preview-styling">
-                    <label for="wcjd-use-custom-media-element-css">
-                        <input autocomplete="off" id="wcjd-use-custom-media-element-css" type="checkbox" value="1" name="<?php echo WCJDOptions::USE_CUSTOM_MEDIA_ELEMENT_CSS; ?>" <?php if ($this->options->useCustomMediaElementCss()) echo 'checked="checked"'; ?> />
+                    <hr/>
+
+                    <h3>Custom Individual Product Media Element CSS</h3>
+                    <label for="wcjd-use-individual-custom-media-element-css">
+                        <input autocomplete="off" id="wcjd-use-individual-custom-media-element-css" type="checkbox" value="1" name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_USE_CUSTOM_MEDIA_ELEMENT_CSS; ?>" <?php if ($this->options->individualPlayerUseCustomMediaElementCss()) echo 'checked="checked"'; ?> />
                         Use custom Media Element CSS
                     </label>
-                    <div class="wcjd-nested-elements" id="wcjd-custom-media-element-css-wrap" <?php if (!$this->options->useCustomMediaElementCss()) 'style="display:none"'; ?> >
-                        <textarea id="wcjd-custom-media-element-css" name="<?php echo WCJDOptions::CUSTOM_MEDIA_ELEMENT_CSS; ?>"><?php echo $this->options->customMediaElementCss(); ?></textarea>
+                    <div class="wcjd-nested-elements" id="wcjd-custom-individual-media-element-css-wrap" <?php if (!$this->options->individualPlayerUseCustomMediaElementCss()) 'style="display:none"'; ?> >
+                        <textarea id="wcjd-custom-individual-media-element-css" name="<?php echo WCJDOptions::INDIVIDUAL_PLAYER_CUSTOM_MEDIA_ELEMENT_CSS; ?>"><?php echo $this->options->individualPlayerCustomMediaElementCss(); ?></textarea>
                         <p class="submit">
                             Use default:
-                            <input id="wcjd-reset-custom-media-element-css" type="button" class="button-primary" value="<?php _e('Standard Media Element CSS') ?>" />
-                            <input id="wcjd-reset-custom-media-element-single-button-css" type="button" class="button-primary" value="<?php _e('Single Button Media Element CSS') ?>" />
+                            <input id="wcjd-reset-custom-individual-media-element-css" type="button" class="button-primary" value="<?php _e('Standard Media Element CSS') ?>" />
+                            <input id="wcjd-reset-custom-individual-media-element-single-button-css" type="button" class="button-primary" value="<?php _e('Single Button Media Element CSS') ?>" />
                         </p>
                     </div>
                     <script type="text/javascript">
                         (function($) {
-                            $('#wcjd-use-custom-media-element-css').change(function() {
-                                $('#wcjd-custom-media-element-css-wrap').toggle($(this).is(':checked'));
+                            $('#wcjd-use-individual-custom-media-element-css').change(function() {
+                                $('#wcjd-custom-individual-media-element-css-wrap').toggle($(this).is(':checked'));
                             });
-                            $('#wcjd-reset-custom-media-element-css').click(function() {
-                                $('#wcjd-custom-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementCss()); ?>);
+                            $('#wcjd-reset-custom-individual-media-element-css').click(function() {
+                                $('#wcjd-custom-individual-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementCss()); ?>);
                             });
-                            $('#wcjd-reset-custom-media-element-single-button-css').click(function() {
-                                $('#wcjd-custom-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementSingleButtonCss()); ?>);
+                            $('#wcjd-reset-custom-individual-media-element-single-button-css').click(function() {
+                                $('#wcjd-custom-individual-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementSingleButtonCss()); ?>);
                             });
                         })(jQuery);
                     </script>
