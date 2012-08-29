@@ -4,7 +4,7 @@ Donate link: N/A
 Tags: audio, woocommerce
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,9 @@ This plugin is available using the standard Wordpress plugin process. On the 'ad
 2. Edit MediaElement CSS & other options on the plugin admin page.
 
 == Changelog ==
+
+= 1.0.12 =
+* Updated admin page about content.
 
 = 1.0.11 =
 * Added custom Media Element CSS admin option for individual product page player.
