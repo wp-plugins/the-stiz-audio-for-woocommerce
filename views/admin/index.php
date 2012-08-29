@@ -1,3 +1,9 @@
+<script type="text/javascript">
+    if (typeof THE_STIZ === 'undefined') var THE_STIZ = {};
+    THE_STIZ.deHtmlEntitize = function(string) {
+        return jQuery('<div>').html(string).text();
+    };
+</script>
 <div class="wrap wcjd-wrap">
     <div class="wcjd-settings-form">
         <h2>The Stiz - Audio for WooCommerce Options</h2>
@@ -63,16 +69,18 @@
                                 <input id="wcjd-reset-custom-media-element-single-button-css" type="button" class="button-primary" value="<?php _e('Single Button Media Element CSS') ?>" />
                             </p>
                         </div>
+                        <pre id="wcjd-custom-media-element-css-default" style="display:none"><?php echo htmlentities($this->options->defaultMediaElementCss()); ?></pre>
+                        <pre id="wcjd-custom-media-element-single-button-css-default" style="display:none"><?php echo htmlentities($this->options->defaultMediaElementSingleButtonCss()); ?></pre>
                         <script type="text/javascript">
                             (function($) {
                                 $('#wcjd-use-custom-media-element-css').change(function() {
                                     $('#wcjd-custom-media-element-css-wrap').toggle($(this).is(':checked'));
                                 });
                                 $('#wcjd-reset-custom-media-element-css').click(function() {
-                                    $('#wcjd-custom-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementCss()); ?>);
+                                    $('#wcjd-custom-media-element-css').val(THE_STIZ.deHtmlEntitize($('#wcjd-custom-media-element-css-default').html()));
                                 });
                                 $('#wcjd-reset-custom-media-element-single-button-css').click(function() {
-                                    $('#wcjd-custom-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementSingleButtonCss()); ?>);
+                                    $('#wcjd-custom-media-element-css').val(THE_STIZ.deHtmlEntitize($('#wcjd-custom-media-element-single-button-css-default').html()));
                                 });
                             })(jQuery);
                         </script>
@@ -95,10 +103,11 @@
                             <input id="wcjd-reset-footer-html" type="button" class="button-primary" value="<?php _e('Reset Footer HTML') ?>" />
                         </p>
                     </div>
+                    <pre id="wcjd-footer-html-default" style="display:none"><?php echo htmlentities($this->options->defaultFooterHtml()); ?></pre>
                     <script type="text/javascript">
                         (function($) {
                             $('#wcjd-reset-footer-html').click(function() {
-                                $('#wcjd-footer-html').html(<?php echo json_encode($this->options->defaultFooterHtml()); ?>);
+                                $('#wcjd-footer-html').val(THE_STIZ.deHtmlEntitize($('#wcjd-footer-html-default').html()));
                             });
                         })(jQuery);
                     </script>
@@ -116,16 +125,19 @@
                             <input id="wcjd-reset-custom-css" type="button" class="button-primary" value="<?php _e('Reset Custom CSS') ?>" />
                         </p>
                     </div>
+                    <pre id="wcjd-custom-css-default" style="display:none"><?php echo htmlentities($this->options->defaultCss()); ?></pre>
                     <script type="text/javascript">
                         (function($) {
                             $('#wcjd-use-custom-css').change(function() {
                                 $('#wcjd-custom-css-wrap').toggle($(this).is(':checked'));
                             });
                             $('#wcjd-reset-custom-css').click(function() {
-                                $('#wcjd-custom-css').html(<?php echo json_encode($this->options->defaultCss()); ?>);
+                                console.log(THE_STIZ.deHtmlEntitize($('#wcjd-custom-css-default').html()));
+                                $('#wcjd-custom-css').val(THE_STIZ.deHtmlEntitize($('#wcjd-custom-css-default').html()));
                             });
                         })(jQuery);
                     </script>
+
                 </div>
 
                 <!-- Individual Products -->
@@ -168,21 +180,6 @@
                         })(jQuery);
                     </script>
 
-                    <?php /*<div>
-                         <label for="wcjd-footer-html">Individual Product Footer HTML</label>
-                        <textarea id="wcjd-footer-html" name="<?php echo WCJDOptions::FOOTER_HTML; ?>"><?php echo $this->options->footerHtml(); ?></textarea>
-                        <p class="submit">
-                            <input id="wcjd-reset-footer-html" type="button" class="button-primary" value="<?php _e('Reset Footer HTML') ?>" />
-                        </p>
-                    </div>
-                    <script type="text/javascript">
-                        (function($) {
-                            $('#wcjd-reset-footer-html').click(function() {
-                                $('#wcjd-footer-html').html(<?php echo json_encode($this->options->defaultFooterHtml()); ?>);
-                            });
-                        })(jQuery);
-                    </script> */ ?>
-
                     <hr/>
 
                     <h3>Custom Individual Product Media Element CSS</h3>
@@ -198,16 +195,18 @@
                             <input id="wcjd-reset-custom-individual-media-element-single-button-css" type="button" class="button-primary" value="<?php _e('Single Button Media Element CSS') ?>" />
                         </p>
                     </div>
+                    <pre id="wcjd-reset-custom-individual-media-element-css-default" style="display:none"><?php echo htmlentities($this->options->defaultMediaElementCss()); ?></pre>
+                    <pre id="wcjd-reset-custom-individual-media-element-single-button-css-default" style="display:none"><?php echo htmlentities($this->options->defaultMediaElementSingleButtonCss()); ?></pre>
                     <script type="text/javascript">
                         (function($) {
                             $('#wcjd-use-individual-custom-media-element-css').change(function() {
                                 $('#wcjd-custom-individual-media-element-css-wrap').toggle($(this).is(':checked'));
                             });
                             $('#wcjd-reset-custom-individual-media-element-css').click(function() {
-                                $('#wcjd-custom-individual-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementCss()); ?>);
+                                $('#wcjd-custom-individual-media-element-css').val(THE_STIZ.deHtmlEntitize($('#wcjd-reset-custom-individual-media-element-css-default').html()));
                             });
                             $('#wcjd-reset-custom-individual-media-element-single-button-css').click(function() {
-                                $('#wcjd-custom-individual-media-element-css').html(<?php echo json_encode($this->options->defaultMediaElementSingleButtonCss()); ?>);
+                                $('#wcjd-custom-individual-media-element-css').val(THE_STIZ.deHtmlEntitize($('#wcjd-reset-custom-individual-media-element-single-button-css-default')));
                             });
                         })(jQuery);
                     </script>
@@ -257,13 +256,15 @@
         <hr/>
         <p>
             The Stiz - Audio for WooCommerce uses <a target="_blank" href="http://mediaelementjs.com/">MediaElement</a>, created by John Dyer.
-            <blockquote>
-                <strong>MediaElement</strong>
-                <br/>
-                HTML5 &lt;video&gt; and &lt;audio&gt; made easy.
-                <br/>
-                One file. Any browser. Same UI.
-            </blockquote>
+        </p>
+        <blockquote>
+            <strong>MediaElement</strong>
+            <br/>
+            HTML5 &lt;video&gt; and &lt;audio&gt; made easy.
+            <br/>
+            One file. Any browser. Same UI.
+        </blockquote>
+        <p>
             <br/>
             <a href="https://twitter.com/johndyer" class="twitter-follow-button" data-show-count="false">Follow @johndyer</a>
         </p>
